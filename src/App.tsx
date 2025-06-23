@@ -3,6 +3,7 @@ import { ResultItem, ResultsList } from "./components/ResultsList/ResultsList";
 import { Input } from "./components/Input/Input";
 import { Button } from "./components/Button/Button";
 import "./App.css";
+import { useDebounce } from "use-debounce";
 
 const API_URL = "http://localhost:8010/proxy/states.json";
 
@@ -14,11 +15,11 @@ export default function App() {
   const [inputValue, setInputValue] = React.useState<string>("");
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
-
+  const [debouncedInput] = useDebounce(inputValue, 300); // ← debounce delay
   const filterStateList = stateList.filter((stateListItem) => {
     return stateListItem.name
       .toLowerCase()
-      .startsWith(inputValue.toLowerCase());
+      .startsWith(debouncedInput.toLowerCase());
   });
 
   /* ──────────────────────────────────────────────────────────
