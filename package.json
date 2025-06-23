@@ -5,7 +5,8 @@
   "type": "module",
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "use-debounce": "^10.0.5"
   },
   "scripts": {
     "api-proxy": "lcp --proxyUrl http://v0.postcodeapi.com.au",
@@ -18,13 +19,16 @@
     "not dead"
   ],
   "devDependencies": {
-    "concurrently": "^8.2.2",
-    "local-cors-proxy": "^1.1.0",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react": "^4.2.1",
+    "concurrently": "^8.2.2",
     "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "local-cors-proxy": "^1.1.0",
+    "typescript": "^5.8.3",
     "vite": "^5.1.4"
   }
 }
