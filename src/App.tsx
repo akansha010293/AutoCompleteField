@@ -6,49 +6,58 @@ import "./App.css";
 
 const API_URL = "http://localhost:8010/proxy/states.json";
 
-const API_SAMPLE = [
-  { name: "Sydney South", state: { abbreviation: "NSW" } },
-  { name: "Sydney", state: { abbreviation: "NSW" } },
-  { name: "Sydney International Airport", state: { abbreviation: "NSW" } },
-  { name: "Sydney Domestic Airport", state: { abbreviation: "NSW" } },
-  { name: "Sydenham", state: { abbreviation: "VIC" } },
-];
-
 export default function App() {
   const [stateList, setStateList] = useState<ResultItem[]>([]);
-  const [selectState, setSelectedState] = useState<ResultItem | undefined>(
+  const [selectedState, setSelectedState] = useState<ResultItem | undefined>(
     undefined
   );
   const [inputValue, setInputValue] = React.useState<string>("");
   const [loading, setLoading] = React.useState(true);
-  const [error, setError] = React.useState(false);
+  const [error, setError] = React.useState<string | null>(null);
 
-  const handleSearchInput = () => {};
+  const filterStateList = stateList.filter((stateListItem) => {
+    return stateListItem.name
+      .toLowerCase()
+      .startsWith(inputValue.toLowerCase());
+  });
 
+  /* ──────────────────────────────────────────────────────────
+     1. Fetch once on mount
+  ──────────────────────────────────────────────────────────── */
   useEffect(() => {
-    const fetchStateList = async () => {
-      const data = await fetch(API_URL);
+    (async () => {
       try {
-        if (data.ok) {
-          const jsonData = await data.json();
-          setStateList(jsonData);
-        }
+        const res = await fetch(API_URL);
+        if (!res.ok) throw new Error("Failed to fetch states");
+        const data: ResultItem[] = await res.json();
+        setStateList(data);
       } catch (err: any) {
-        setError(err.message);
+        setError(err.message ?? "Unknown error");
+      } finally {
+        setLoading(false);
       }
-    };
-    fetchStateList();
-    setLoading(false);
+    })();
   }, []);
-
+  if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
   return (
     <section>
       TODO: Implement a suburb autocomplete using &lt;Input /&gt;,
       &lt;ResultsList /&gt; and &lt;Button /&gt; and data provided by the{" "}
       <a href={`${API_URL}?q=${inputValue}`}>API</a>.
-      <Input value={inputValue} onChange={setInputValue} />
-      <Button onClick={handleSearchInput} />
+      <Input
+        value={inputValue}
+        onChange={setInputValue}
+        placeholder="Search a state"
+      />
+      <Button onClick={() => setInputValue("")} />
+      <ResultsList items={filterStateList} onSelect={setSelectedState} />
+      {selectedState && (
+        <p>
+          Your selected state is : {selectedState.name} ,
+          {selectedState.abbreviation}
+        </p>
+      )}
     </section>
   );
 }

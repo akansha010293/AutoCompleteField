@@ -4,9 +4,7 @@ import "./ResultsList.css";
 // Define the structure of each item
 export interface ResultItem {
   name: string;
-  state: {
-    abbreviation: string;
-  };
+  abbreviation: string;
 }
 
 // Define the props for ResultsList
@@ -23,6 +21,7 @@ export const ResultsList: React.FC<ResultsListProps> = ({
   items,
   ...otherProps
 }) => {
+  console.log("items", items);
   if (items.length === 0) return;
   return (
     <ul className={`ResultsList ${className}`} {...otherProps}>
@@ -33,7 +32,7 @@ export const ResultsList: React.FC<ResultsListProps> = ({
           onClick={() => onSelect(item)}
         >
           <button className="ResultsList-button">
-            {item.name}, {item.state.abbreviation}
+            {item.name}, {item.abbreviation}
           </button>
         </li>
       ))}

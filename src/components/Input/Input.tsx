@@ -19,25 +19,15 @@ export const Input: React.FC<InputProps> = ({
   className = "",
   ...otherProps
 }) => {
-  const [inputValue, setInputValue] = useState(value);
-  const [debouncedValue] = useDebounce(inputValue, 500);
-  // Sync with external value changes
-  useEffect(() => {
-    setInputValue(value);
-    console.log(inputValue);
-  }, [value]);
-
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const newValue = event.target.value;
-    setInputValue(newValue);
-    onChange(debouncedValue);
+    onChange(event.target.value);
   };
 
   return (
     <input
       className={`Input ${className}`}
       type="text"
-      value={inputValue}
+      value={value}
       onChange={handleChange}
       {...otherProps}
     />
