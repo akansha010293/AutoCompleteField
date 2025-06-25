@@ -11,6 +11,7 @@ export interface ResultItem {
 interface ResultsListProps {
   items: ResultItem[];
   onSelect: Dispatch<SetStateAction<ResultItem | undefined>>;
+  setShowResultList: Dispatch<SetStateAction<boolean>>;
   className?: string;
   [key: string]: any;
 }
@@ -19,6 +20,7 @@ const ResultsList: React.FC<ResultsListProps> = ({
   className = "",
   onSelect,
   items,
+  setShowResultList,
   ...otherProps
 }) => {
   const listItemRefs = useRef<(HTMLLIElement | null)[]>([]);
@@ -65,7 +67,10 @@ const ResultsList: React.FC<ResultsListProps> = ({
           onKeyDown={(e: React.KeyboardEvent<HTMLLIElement>) =>
             handleKeyDown(e, index)
           }
-          onClick={() => onSelect(item)}
+          onClick={() => {
+            onSelect(item);
+            setShowResultList(false);
+          }}
         >
           {item.name}, {item.abbreviation.toUpperCase()}
         </li>

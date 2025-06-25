@@ -65,6 +65,7 @@ export const SearchPage = () => {
                 items={filterStateList}
                 onSelect={setSelectedState}
                 className="searchBox-dropdown"
+                setShowResultList={setShowResultList}
               />
             )}
           </div>
@@ -81,7 +82,7 @@ export const SearchPage = () => {
           }}
         >
           <p>
-            Your selected state is : {selectedState.name} ,
+            Your selected state is : {selectedState.name} ,{" "}
             {selectedState.abbreviation}
           </p>
         </Modal>
