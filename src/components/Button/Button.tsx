@@ -1,6 +1,5 @@
 import React, { ButtonHTMLAttributes } from "react";
-//@todo
-// import iconPath from "./icons.svg";
+import iconPath from "./icons.svg";
 import "./Button.css";
 
 // Extend native button props, overriding `onClick` for custom typing
@@ -22,7 +21,7 @@ export const Button: React.FC<ButtonProps> = ({
       {...otherProps}
     >
       <svg viewBox="0 0 24 24" width="24" height="16">
-        {/* <use xlinkHref={`${iconPath}#dls-icon-arrow-right`} /> */}
+        <use xlinkHref={`${iconPath}#dls-icon-arrow-right`} />
       </svg>
     </button>
   );

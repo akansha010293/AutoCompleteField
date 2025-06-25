@@ -1,6 +1,8 @@
 .Button {
   background: #fdc605;
   border: none;
+  display: flex;
+  align-items: center;
 }
 
 .Button svg {

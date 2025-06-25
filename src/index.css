@@ -41,3 +41,51 @@ section {
   padding: 1rem;
   margin: 1rem;
 }
+/* -------------------- Search Box Layout -------------------- */
+.searchBox {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.searchBox-inputGroup {
+  display: flex;
+  align-items: flex-start;
+}
+
+.searchBox-label {
+  background: hsl(0, 0%, 95%);
+  padding: 10px;
+  width: 100px;
+  text-align: center;
+}
+.searchBox-inputContainer {
+  position: relative;
+  width: 100%;
+}
+.searchBox-inputWrapper {
+  display: flex;
+  width: 100%;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: box-shadow 0.2s, border 0.2s;
+}
+.searchBox-inputWrapper:focus-within {
+  border: 2px solid #5c95db;
+  box-shadow: 0 0 0 3px rgba(82, 151, 225, 0.2);
+}
+
+.searchBox-dropdown {
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  max-height: 15rem;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-top: none;
+  background: #fff;
+}
