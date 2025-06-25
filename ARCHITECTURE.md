@@ -22,6 +22,9 @@ Local state is managed using React’s `useState` and `useEffect` hooks. Debounc
 ## Constant
 - Added constant API url as a const as it allows you to quickly update the URL in one place if it changes—improving consistency and reducing errors
 
+## Testing
+- Added testing for filtering logic and that can be extended to any list of data it recieve either suburb or state and you can update the type of the result accordingly 
+
 ## Accessibility
 
 Accessibility is a core consideration:
